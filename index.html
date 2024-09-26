@@ -373,19 +373,9 @@ $('#viewData').click(function () {
     const totalOT = loggedInUser.otEntries.reduce((sum, entry) => sum + entry.otHours, 0);
     const totalPay = loggedInUser.otEntries.reduce((sum, entry) => sum + entry.payment, 0);
 
-    // নতুন সেকশন তৈরি করে ডেটা দেখানো
-    let userInfoHtml = `<div id="userDataSection" class="mt-4">
-        <h4>ব্যবহারকারীর তথ্য</h4>
-        <p>নাম: ${loggedInUser.username}</p>
-        <p>কার্ড নম্বর: ${loggedInUser.cardNumber}</p>
-        <h4>মোট ওভারটাইম এবং টাকা</h4>
-        <p>মোট ওভারটাইম: ${totalOT} ঘন্টা</p>
-        <p>মোট টাকা: ${totalPay}৳</p>
-    </div>`;
-
-    // ডেটা প্রদর্শন এলাকা ক্লিয়ার করে নতুন তথ্য দেখানো
-    $('#userDataSection').remove();  // আগের কোনো ডেটা থাকলে মুছে ফেলার জন্য
-    $('#userSection').append(userInfoHtml);
+    // নতুন পেজে রিডিরেক্ট করা এবং URL এ ডেটা পাঠানো
+    const url = `data.html?username=${loggedInUser.username}&cardNumber=${loggedInUser.cardNumber}&totalOT=${totalOT}&totalPay=${totalPay}`;
+    window.location.href = url;
 });
 
     // Manually add OT data logic
