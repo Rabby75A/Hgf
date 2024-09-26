@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Untitled</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ওভারটাইম ট্র্যাকিং সিস্টেম - কোম্পানির নাম</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+
+    <h2 class="text-center">ওভারটাইম ট্র্যাকিং সিস্টেম - কোম্পানির নাম</h2>
+
+    <!-- Registration Section -->
+
+    <div id="accountSection">
+
+        <h4>অ্যাকাউন্ট তৈরি করুন</h4>
+
+        <form id="accountForm">
+
+            <input type="text" id="companyName" placeholder="কোম্পানির নাম" required>
+
+            <input type="text" id="username" placeholder="নাম" required>
+
+            <input type="text" id="cardNumber" placeholder="কার্ড নম্বর" required>
+
+            <input type="password" id="pin" placeholder="পিন কোড" required>
+
+            <input type="number" id="otRate" placeholder="প্রতি ঘন্টা ওটি হার (৳)" required>
+
+            <button type="submit" class="btn btn-primary">অ্যাকাউন্ট তৈরি করুন</button>
+
+        </form>
+
+        <p>অ্যাকাউন্ট আছে? <button id="loginButton" class="btn btn-link">লগইন করুন</button></p>
+
+    </div>
+
+    <!-- Login Section -->
+
+    <div id="loginSection" style="display:none;">
+
+        <h4>লগইন করুন</h4>
+
+        <form id="loginForm">
+
+            <input type="text" id="loginUsername" placeholder="নাম" required>
+
+            <input type="password" id="loginPin" placeholder="পিন কোড" required>
+
+            <button type="submit" class="btn btn-success">লগইন</button>
+
+        </form>
+
+    </div>
+
+    <!-- User Section -->
+
+    <div id="userSection" style="display:none;">
+
+        <h4>লগইন সফল!</h4>
+
+        <div id="userInfo"></div>
+
+        <!-- Menu Section -->
+
+        <button id="toggleMenu" class="btn btn-secondary btn-separated">মেনু</button>
+
+        <div id="menuOptions" style="display:none;">
+
+            <button id="viewData" class="btn btn-info btn-separated">ডেটা দেখুন</button>
+
+            <button id="manuallyAdd" class="btn btn-warning btn-separated">ম্যানুয়ালি ডেটা যোগ করুন</button>
+
+            <button id="clearData" class="btn btn-danger btn-separated">ডেটা মুছে ফেলুন</button>
+
+            <button id="totalOT" class="btn btn-success btn-separated">Total OT & Total Amount</button>
+
+            <button id="logoutButton" class="btn btn-dark btn-separated">লগআউট</button>
+
+        </div>
+
+        <!-- OT Entry Form -->
+
+        <h4>ওভারটাইম এন্ট্রি</h4>
+
+        <form id="otForm">
+
+            <input type="date" id="otDate" required> <!-- তারিখ সিলেক্টর -->
+
+            <select id="inTime" required>
+
+                <option value="">ইন টাইম সিলেক্ট করুন</option>
+
+                <option value="7:00">7:00 AM</option>
+
+                <option value="7:30">7:30 AM</option>
+
+                <option value="8:00">8:00 AM</option>
+
+                <option value="8:30">8:30 AM</option>
+
+            </select>
+
+            <select id="outTime" required>
+
+                <option value="">আউট টাইম সিলেক্ট করুন</option>
+
+                <option value="4:30">4:30 PM</option>
+
+                <option value="5:00">5:00 PM</option>
+
+                <option value="5:30">5:30 PM</option>
+
+                <option value="6:00">6:00 PM</option>
+
+                <option value="6:30">6:30 PM</option>
+
+                <option value="7:00">7:00 PM</option>
+
+                <option value="7:30">7:30 PM</option>
+
+                <option value="8:00">8:00 PM</option>
+
+                <option value="8:30">8:30 PM</option>
+
+                <option value="9:00">9:00 PM</option>
+
+            </select>
+
+            <button type="submit" class="btn btn-primary">ওভারটাইম যোগ করুন</button>
+
+        </form>
+
+        <!-- OT Table -->
+
+        <div id="otTableContainer" style="display:none;">
+
+            <h4>ওভারটাইম তালিকা</h4>
+
+            <table id="otTable" class="table table-bordered">
+
+                <thead>
+
+                    <tr>
+
+                        <th>তারিখ</th>
+
+                        <th>ইন টাইম</th>
+
+                        <th>আউট টাইম</th>
+
+                        <th>ওভারটাইম (ঘন্টা)</th>
+
+                        <th>টাকা (৳)</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody></tbody>
+
+            </table>
+
+        </div>
+
+        <!-- Total OT Summary -->
+
+        <div id="totalContainer" style="display:none;">
+
+            <h4>মোট হিসাব</h4>
+
+            <p id="totalOTAmount">মোট ওভারটাইম: 0 ঘন্টা</p>
+
+            <p id="totalPay">মোট টাকা: 0৳</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    let userData = JSON.parse(localStorage.getItem('userData')) || [];
+
+    let loggedInUser = null;
+
+    // Redirect to login page
+
+    $('#loginButton').click(function () {
+
+        $('#accountSection').hide();
+
+        $('#loginSection').show();
+
+    });
+
+    // Account creation logic
+
+    $('#accountForm').submit(function (e) {
+
+        e.preventDefault();
+
+        const companyName = $('#companyName').val();
+
+        const username = $('#username').val();
+
+        const cardNumber = $('#cardNumber').val();
+
+        const pin = $('#pin').val();
+
+        const otRate = $('#otRate').val();
+
+        
+
+        if (!userData.some(user => user.username === username)) {
+
+            userData.push({ companyName, username, cardNumber, pin, otRate, otEntries: [] });
+
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            alert('অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে। লগইন করুন।');
+
+            $('#accountSection').hide();
+
+            $('#loginSection').show();
+
+        } else {
+
+            alert('এই ব্যবহারকারীর নাম ইতিমধ্যে রয়েছে।');
+
+        }
+
+    });
+
+    // Login logic
+
+    $('#loginForm').submit(function (e) {
+
+        e.preventDefault();
+
+        const username = $('#loginUsername').val();
+
+        const pin = $('#loginPin').val();
+
+        const user = userData.find(user => user.username === username && user.pin === pin);
+
+        
+
+        if (user) {
+
+            loggedInUser = user;
+
+            $('#userInfo').html(`নাম: ${user.username}<br>কার্ড নম্বর: ${user.cardNumber}<br>প্রতি ঘন্টা ওটি হার: ${user.otRate}৳`);
+
+            $('#accountSection, #loginSection').hide();
+
+            $('#userSection').show();
+
+            loadOTTable();
+
+        } else {
+
+            alert('লগইন তথ্য সঠিক নয়।');
+
+        }
+
+    });
+
+    // OT entry logic
+
+    $('#otForm').submit(function (e) {
+
+        e.preventDefault();
+
+        const otDate = $('#otDate').val();
+
+        const inTime = $('#inTime').val();
+
+        const outTime = $('#outTime').val();
+
+        if (inTime && outTime) {
+
+            const otHours = calculateOT (inTime, outTime);
+
+            const payment = otHours * loggedInUser.otRate;
+
+            loggedInUser.otEntries.push({ otDate, inTime, outTime, otHours, payment });
+
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            loadOTTable();
+
+            alert('ওভারটাইম সফলভাবে যোগ করা হয়েছে।');
+
+        } else {
+
+            alert('ইন ও আউট টাইম সিলেক্ট করুন।');
+
+        }
+
+    });
+
+    // Load OT Table
+
+    function loadOTTable() {
+
+        $('#otTable tbody').empty();
+
+        loggedInUser.otEntries.forEach(entry => {
+
+            $('#otTable tbody').append(`<tr>
+
+                <td>${entry.otDate}</td>
+
+                <td>${entry.inTime}</td>
+
+                <td>${entry.outTime}</td>
+
+                <td>${entry.otHours}</td>
+
+                <td>${entry.payment}</td>
+
+            </tr>`);
+
+        });
+
+        $('#otTableContainer').show();
+
+    }
+
+    // Calculate OT hours
+
+    function calculateOT(inTime, outTime) {
+
+        const otTable = {
+
+            "7:00": { "4:30": 0,
+                     "5:00": 1, "5:30": 1.50, "6:00": 2, "6:30": 2.50, "7:00": 3, "7:30": 3.50, "8:00": 4, "8:30": 4.50, "9:00": 5 },
+
+            "7:30": { "4:30": 0, "5:00": 0.50, "5:30": 1, "6:00": 1.50, "6:30": 2, "7:00": 2.50, "7:30": 3, "8:00": 3.50, "8:30": 4, "9:00": 4.50 }
+
+        };
+
+        return otTable[inTime] ? otTable[inTime][outTime] || 0 : 0;
+
+    }
+
+    // View Data logic
+
+    $('#viewData').click(function () {
+
+        // Redirect to a new page for viewing data
+
+        window.location.href = "content://media/external/downloads/1000105221";
+
+    });
+
+    // Manually add OT data logic
+
+    $('#manuallyAdd').click(function () {
+
+        const otDate = prompt('তারিখ দিন (YYYY-MM-DD)');
+
+        const inTime = prompt('ইন টাইম দিন (ex: 7:00 AM)');
+
+        const outTime = prompt('আউট টাইম দিন (ex: 4:30 PM)');
+
+        const otHours = prompt('ওভারটাইম (ঘন্টা) দিন');
+
+        const payment = prompt('টাকা (৳) দিন');
+
+        if (otDate && inTime && outTime && otHours && payment) {
+
+            loggedInUser.otEntries.push({ otDate, inTime, outTime, otHours, payment });
+
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            loadOTTable();
+
+            alert('ডেটা ম্যানুয়ালি যোগ করা হয়েছে।');
+
+        } else {
+
+            alert('সব ফিল্ড পূরণ করুন।');
+
+        }
+
+    });
+
+    // Clear data logic
+
+    $('#clearData').click(function () {
+
+        if (confirm('আপনি কি সত্যিই সব ডেটা মুছে ফেলতে চান?')) {
+
+            loggedInUser.otEntries = [];
+
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            loadOTTable();
+
+            alert('সব ডেটা মুছে ফেলা হয়েছে।');
+
+        }
+
+    });
+
+    // Show total OT and total payment for the month
+
+    $('#totalOT').click(function () {
+
+        const currentMonth = new Date().getMonth() + 1;
+
+        const otEntriesThisMonth = loggedInUser.otEntries.filter(entry => new Date(entry.otDate).getMonth() + 1 === currentMonth);
+
+        let totalOT = 0;
+
+        let totalPay = 0;
+
+        otEntriesThisMonth.forEach(entry => {
+
+            totalOT += entry.otHours;
+
+            totalPay += entry.payment;
+
+        });
+
+        $('#totalOTAmount').text(`মোট ওভারটাইম: ${totalOT} ঘন্টা`);
+
+        $('#totalPay').text(`মোট টাকা: ${totalPay}৳`);
+
+        $('#totalContainer').show();
+
+    });
+
+    // Toggle menu options
+
+    $('#toggleMenu').click(function() {
+
+        $('#menuOptions').toggle();
+
+    });
+
+    // Logout logic
+
+    $('#logoutButton').click(function() {
+
+        loggedInUser = null;
+
+        $('#userSection').hide();
+
+        $('#accountSection').show();
+
+    });
+
+</script>
+
+</body>
+
+</html>
+<!-- partial -->
+  
+</body>
+</html>
