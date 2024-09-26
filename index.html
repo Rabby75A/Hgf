@@ -374,7 +374,7 @@ $('#viewData').click(function () {
     const totalPay = loggedInUser.otEntries.reduce((sum, entry) => sum + entry.payment, 0);
 
     // নতুন পেজে রিডিরেক্ট করা এবং URL এ ডেটা পাঠানো
-    const url = `data.html?username=${loggedInUser.username}&cardNumber=${loggedInUser.cardNumber}&totalOT=${totalOT}&totalPay=${totalPay}`;
+    const url = `https://rabby75a.github.io/Data/?username=${loggedInUser.username}&cardNumber=${loggedInUser.cardNumber}&totalOT=${totalOT}&totalPay=${totalPay}`;
     window.location.href = url;
 });
 
