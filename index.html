@@ -10,6 +10,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
             background-color: #f4f4f4;
         }
@@ -19,6 +20,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
         button {
             padding: 10px 20px;
@@ -40,6 +42,22 @@
         #copyBtn {
             display: none;
         }
+        .next-step-container {
+            margin-top: 20px;
+        }
+        .card {
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .btn-info {
+            background-color: green; /* Green background color */
+            color: white;
+            border: none;
+        }
+        .btn-info:hover {
+            background-color: darkgreen; /* Darker green on hover */
+        }
     </style>
 </head>
 <body>
@@ -49,6 +67,17 @@
     <button onclick="generateWallet()">Generate Wallet</button>
     <button id="copyBtn" onclick="copyWallet()">Copy Wallet</button>
     <p id="wallet"></p>
+</div>
+
+<div class="container next-step-container">
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">Proceed to the Next Step</h5>
+            <a href="https://amingo.biz/?ref=10919" id="next-step-btn" class="btn btn-info mt-3">
+                Next Step
+            </a>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -70,24 +99,9 @@
         tempInput.setSelectionRange(0, 99999); // For mobile devices
         document.execCommand('copy');
         document.body.removeChild(tempInput);
-        alert("Copied the wallet: " + generatedWallet); // Alert the copied text
+        // No alert for copy action
     }
 </script>
 
 </body>
 </html>
-
-<div class="container mt-5">
-    <div class="card text-center">
-        <div class="card-body">
-            <h5 class="card-title">Proceed to the Next Step</h5>
-            <a href="https://amingo.biz/?ref=10919" id="next-step-btn" class="btn btn-info mt-3">
-                Next Step
-            </a>
-        </div>
-    </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
